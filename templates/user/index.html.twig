@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Users page{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" media="screen" href="css/style.css" />
+{% endblock %}
+
+{% block body %}
+    <div class="list">
+        <table class="noborder">
+            <tr>
+                <td class="noborder"><h1>List of users :</h1></td>
+                <td class="noborder" style="text-align:right">
+                    <form action="{{ path('books') }}" method="POST"><button>Switch books</button></form>
+                </td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <th>User #</th>
+                <th>FirstName</th>
+                <th>LastName</th>
+                <th>Birthdate</th>
+                <th></th>
+            </tr>
+            {% for person in people %}
+            <tr>
+                <td>{{ person.personId }}</td>
+                <td>{{ person.personFirstname }}</td>
+                <td>{{ person.personLastname }}</td>
+                <td>{{ person.personBirthdate |date("d/m/Y") }}</td>
+                <td>
+                    <form class="iconForm" method="POST" action="#">
+                        <input type="hidden" name="id" value="{{person.personId}}" />
+                        <button name="edit" formaction="{{path('editUser')}}">
+                            <img src="img/edit.png" alt="edit" class="icon" />
+                        </button>
+                        <button name="delete" formaction="{{path('removeUser')}}">
+                            <img src="img/delete.png" alt="edit" class="icon" />
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <td colspan="4"></td>
+                <td>
+                    <form class="iconForm" method="POST" action="/addUser">
+                        <button>
+                            <img src="img/plus.png" alt="edit" class="icon" />
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        </table>
+
+    </div>
+{% endblock %}

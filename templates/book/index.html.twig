@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Books page{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" media="screen" href="css/style.css" />
+{% endblock %}
+
+{% block body %}
+    <div class="list">
+        <table class="noborder">
+            <tr>
+                <td class="noborder"><h1>List of books :</h1></td>
+                <td class="noborder" style="text-align:right">
+                    <form action="{{ path('users') }}" method="POST"><button>Switch users</button></form>
+                </td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <th>Book #</th>
+                <th>Title</th>
+                <th>Authors</th>
+                <th></th>
+            </tr>
+            {% for book in books %}
+            <tr>
+                <td>{{ book.bookId }}</td>
+                <td>{{ book.bookTitle }}</td>
+                <td>{{ book.bookAuthors }}</td>
+                <td>
+                    <form class="iconForm" method="POST" action="#">
+                        <input type="hidden" name="id" value="{{book.bookId}}" />
+                        <button name="edit" formaction="{{path('editBook')}}">
+                            <img src="img/edit.png" alt="edit" class="icon" />
+                        </button>
+                        <button name="delete" formaction="{{path('removeBook')}}">
+                            <img src="img/delete.png" alt="edit" class="icon" />
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <td colspan="3"></td>
+                <td>
+                    <form class="iconForm" method="POST" action="/addNewBook">
+                        <button>
+                            <img src="img/plus.png" alt="edit" class="icon" />
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        </table>
+
+    </div>
+{% endblock %}

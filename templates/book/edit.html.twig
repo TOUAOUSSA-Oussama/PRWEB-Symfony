@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Book page{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" media="screen" href="css/style.css" />
+{% endblock %}
+
+{% block body %}
+    <div class="list">
+        <h1>Update book :</h1>
+        <form method="POST" action="/saveBook">
+            <table>
+                <tr>
+                    <th>Book #</th>
+                    <td>
+                        {% if book.bookId is not null %}
+                            <input type="text" name="id" placeholder="id" value="{{ book.bookId }}" />
+                        {% else %}
+                            NEW<input type="hidden" name="id" value="-1" />
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <th>Title</th>
+                    <td><input type="text" name="Title" placeholder="Title" value="{{ book.bookTitle }}" size="60" /></td>
+                </tr>
+                <tr>
+                    <th>Authors</th>
+                    <td><input type="text" name="Authors" placeholder="Authors" value="{{ book.bookAuthors }}" size="60" /></td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <button class="saveBtn">Save</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+        
+    </div>
+{% endblock %}
